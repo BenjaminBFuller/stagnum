@@ -15,7 +15,7 @@ class Tadpole(pg.sprite.Sprite):
         self.direction = Vector2()
         self.rect = self.image.get_rect()
         self.rect.center = (screen_width // 2, screen_height // 2)
-        self.speed = 500
+        self.speed = 300
 
     def update(self, dt):
         for event in pg.event.get():
@@ -47,8 +47,8 @@ class Tadpole(pg.sprite.Sprite):
         movement = self.direction * self.speed * dt
 
         # Calculate the tadpole's position
-        new_x = self.rect.x + int(movement.x)
-        new_y = self.rect.y + int(movement.y)
+        new_x = self.rect.x + round(movement.x)
+        new_y = self.rect.y + round(movement.y)
 
         # Updates new tadpole position if inside the game window
         if 0 <= new_x <= screen_width - self.rect.width:
