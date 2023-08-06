@@ -1,64 +1,80 @@
-import pygame as pg
+# Flying Squirrel presents Stagnum
+
+from settings import *
+from pygame.math import Vector2
+from pygame.sprite import Group
+import time
 import sys
-
-pg.init()
-
-# Set up the screen dimensions
-screen_width, screen_height = 800, 600
-screen = pg.display.set_mode((screen_width, screen_height))
-pg.display.set_caption("Tadpole Game")
-
-# Define colors (RGB)
-WHITE = (255, 255, 255)
 
 
 class Tadpole(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        # Load the tadpole image
         self.image = pg.Surface((20, 20))
         self.image.fill(WHITE)
+        self.direction = Vector2()
         self.rect = self.image.get_rect()
         self.rect.center = (screen_width // 2, screen_height // 2)
-        self.speed = 1
+        self.speed = 500
 
-    def update(self):
-        # Get the keys pressed
-        keys = pg.key.get_pressed()
-        # Update the position based on the keys pressed
-        if keys[pg.K_q]:
-            pg.quit()
-            sys.exit()
-        if keys[pg.K_w]:
-            self.rect.y -= self.speed
-        if keys[pg.K_a]:
-            self.rect.x -= self.speed
-        if keys[pg.K_s]:
-            self.rect.y += self.speed
-        if keys[pg.K_d]:
-            self.rect.x += self.speed
-
-
-def main():
-    # Create the tadpole object
-    tadpole = Tadpole()
-    all_sprites = pg.sprite.Group(tadpole)
-
-    # Game loop
-    while True:
+    def update(self, dt):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
 
-        # Update tadpole position
-        all_sprites.update()
+        keys = pg.key.get_pressed()
 
-        # Draw everything
-        screen.fill((0, 0, 0))  # Clear the screen
-        all_sprites.draw(screen)  # Draw the tadpole
-        pg.display.flip()  # Update the display
+        if keys[pg.K_ESCAPE]:
+            pg.quit()
+            sys.exit()
+        if keys[pg.K_a]:
+            self.direction.x = -1
+        elif keys[pg.K_d]:
+            self.direction.x = 1
+        else:
+            self.direction.x = 0
+        if keys[pg.K_w]:
+            self.direction.y = -1
+        elif keys[pg.K_s]:
+            self.direction.y = 1
+        else:
+            self.direction.y = 0
+
+        # Normalize the vector to ensure constant speed
+        if self.direction.magnitude() > 0:
+            self.direction = self.direction.normalize()
+        movement = self.direction * self.speed * dt
+
+        # Calculate the tadpole's position
+        new_x = self.rect.x + int(movement.x)
+        new_y = self.rect.y + int(movement.y)
+
+        # Updates new tadpole position if inside the game window
+        if 0 <= new_x <= screen_width - self.rect.width:
+            self.rect.x = new_x
+        if 0 <= new_y <= screen_height - self.rect.height:
+            self.rect.y = new_y
+
+
+class Game:
+    def __init__(self):
+        self.previous_time = time.time()  # create clock for calculating delta time
+        self.tadpole = Tadpole()
+
+    def main(self):
+        all_sprites = Group(self.tadpole)
+
+        while True:
+            # unused delta time to account for varying framerates
+            dt = time.time() - self.previous_time  # delta time
+            self.previous_time = time.time()
+            all_sprites.update(dt)
+            screen.fill((0, 0, 0))
+            all_sprites.draw(screen)
+            pg.display.flip()
 
 
 if __name__ == "__main__":
-    main()
+    game = Game()
+    game.main()
