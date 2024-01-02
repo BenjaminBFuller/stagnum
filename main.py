@@ -51,6 +51,7 @@ class Tadpole(pg.sprite.Sprite):
         new_y = self.rect.y + round(movement.y)
 
         # Updates new tadpole position if inside the game window
+        # Collision handling
         if 0 <= new_x <= screen_width - self.rect.width:
             self.rect.x = new_x
         if 0 <= new_y <= screen_height - self.rect.height:
@@ -63,12 +64,11 @@ class Game:
         self.tadpole = Tadpole()
 
     def main(self):
+        # group together sprites to update them altogether
         all_sprites = Group(self.tadpole)
-
         while True:
-            # unused delta time to account for varying framerates
-            dt = time.time() - self.previous_time  # delta time
-            self.previous_time = time.time()
+            dt = time.time() - self.previous_time  # calculation of 1 game loop / delta time
+            self.previous_time = time.time()  # start of delta time loop
             all_sprites.update(dt)
             screen.fill((0, 0, 0))
             all_sprites.draw(screen)
