@@ -16,9 +16,10 @@ class Player(pg.sprite.Sprite):
         self.image = pg.Surface((20, 20))
         self.image.fill(WHITE)
         self.direction = Vector2()
+        self.position = [1, 1]
         self.rect = self.image.get_rect()
-        self.rect.center = (screen_width // 2, screen_height // 2)
-        self.speed = 300
+        self.rect.center = (self.position[0] * 50, self.position[1] * 50)
+        self.speed = 250
 
     def update(self, dt):
         for event in pg.event.get():
