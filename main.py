@@ -15,51 +15,46 @@ class Player(pg.sprite.Sprite):
         super().__init__()
         self.image = pg.Surface((20, 20))
         self.image.fill(WHITE)
-        self.direction = Vector2()
         self.position = [1, 1]
         self.rect = self.image.get_rect()
-        self.rect.center = (self.position[0] * 50, self.position[1] * 50)
+        self.rect.center = (self.position[0] * tile, self.position[1] * tile)
         self.speed = 250
 
     def update(self, dt):
+        """
+
+        :param dt:
+        :return:
+        """
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
+            if event.type == pg.KEYDOWN:  # key mapping
+                # controls: WASD for move, SPACE for stop/resume, q for quit
+                # SPACE will stop and resume movement and inputting WASD after stopping will also resume
+                if event.key == pg.K_w:
+                    # North
+                    self.position[1] -= 1
+                elif event.key == pg.K_d:
+                    # East
+                    self.position[0] += 1
+                elif event.key == pg.K_s:
+                    # South
+                    self.position[1] += 1
+                elif event.key == pg.K_a:
+                    # West
+                    self.position[0] -= 1
+                if event.key == pg.K_q:
+                    pg.quit()  # quit on keystroke q
+                    sys.exit()
 
-        keys = pg.key.get_pressed()
+                if 0 <= self.position[1] <= screen_width - self.rect.width:
+                    self.rect.x = self.position[0] * tile
 
-        if keys[pg.K_ESCAPE]:
-            pg.quit()
-            sys.exit()
-        if keys[pg.K_a]:
-            self.direction.x = -1
-        elif keys[pg.K_d]:
-            self.direction.x = 1
-        else:
-            self.direction.x = 0
-        if keys[pg.K_w]:
-            self.direction.y = -1
-        elif keys[pg.K_s]:
-            self.direction.y = 1
-        else:
-            self.direction.y = 0
+                if 0 <= self.position[0] <= screen_height - self.rect.height:
+                    self.rect.y = self.position[1] * tile
 
-        # Normalize the vector to ensure constant speed
-        if self.direction.magnitude() > 0:
-            self.direction = self.direction.normalize()
-        movement = self.direction * self.speed * dt
-
-        # Calculate the player's position
-        new_x = self.rect.x + round(movement.x)
-        new_y = self.rect.y + round(movement.y)
-
-        # Updates new player position if inside the game window
-        # Collision handling
-        if 0 <= new_x <= screen_width - self.rect.width:
-            self.rect.x = new_x
-        if 0 <= new_y <= screen_height - self.rect.height:
-            self.rect.y = new_y
 
 
 class Game:
