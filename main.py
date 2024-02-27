@@ -1,4 +1,4 @@
-# Flying Squirrel presents Stagnum
+# Stagnum
 
 from settings import *
 from pygame.math import Vector2
@@ -7,7 +7,10 @@ import time
 import sys
 
 
-class Tadpole(pg.sprite.Sprite):
+class Player(pg.sprite.Sprite):
+    """
+    Main Player controllable character class
+    """
     def __init__(self):
         super().__init__()
         self.image = pg.Surface((20, 20))
@@ -46,11 +49,11 @@ class Tadpole(pg.sprite.Sprite):
             self.direction = self.direction.normalize()
         movement = self.direction * self.speed * dt
 
-        # Calculate the tadpole's position
+        # Calculate the player's position
         new_x = self.rect.x + round(movement.x)
         new_y = self.rect.y + round(movement.y)
 
-        # Updates new tadpole position if inside the game window
+        # Updates new player position if inside the game window
         # Collision handling
         if 0 <= new_x <= screen_width - self.rect.width:
             self.rect.x = new_x
@@ -61,11 +64,11 @@ class Tadpole(pg.sprite.Sprite):
 class Game:
     def __init__(self):
         self.previous_time = time.time()  # create clock for calculating delta time
-        self.tadpole = Tadpole()
+        self.player = Player()
 
     def main(self):
         # group together sprites to update them altogether
-        all_sprites = Group(self.tadpole)
+        all_sprites = Group(self.player)
         while True:
             dt = time.time() - self.previous_time  # calculation of 1 game loop / delta time
             self.previous_time = time.time()  # start of delta time loop
