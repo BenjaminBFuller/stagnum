@@ -12,3 +12,6 @@ tile = 50
 
 # Define colors (RGB)
 WHITE = (255, 255, 255)
+
+tadpole_image = pg.image.load("images/tadpole1.png").convert_alpha()
+tadpole_image = pg.transform.scale(tadpole_image, (tile, tile))
