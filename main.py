@@ -13,13 +13,11 @@ class Player(pg.sprite.Sprite):
     """
     def __init__(self):
         super().__init__()
-        self.image = pg.Surface((20, 20))
-        self.image.fill(WHITE)
+        self.image = tadpole_image
         self.rect = self.image.get_rect()
         self.rect.center = (1 * tile, 1 * tile)
         self.direction = Vector2()
         self.position = Vector2(self.rect.center)
-        self.last_position = self.position
         self.is_moving = False
         self.speed = 5
 
@@ -62,15 +60,18 @@ class Player(pg.sprite.Sprite):
             self.direction = self.direction.normalize()
         movement = self.direction * self.speed
 
-        self.last_position = self.position - movement
         self.position += movement
 
         # set center position of player rect to the location of the position vector
         self.rect.center = round(self.position)
 
+    def draw(self):
+        screen.blit(self.image, (self.rect.x, self.rect.y))
+
     def update(self):
         self.input()
         self.move()
+        self.draw()
 
 
 class Game:
@@ -87,7 +88,7 @@ class Game:
             all_sprites.update()
             screen.fill((0, 0, 0))
             all_sprites.draw(screen)
-            pg.display.flip()
+            pg.display.update()
 
 
 if __name__ == "__main__":
