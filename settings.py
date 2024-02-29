@@ -7,6 +7,8 @@ screen_width, screen_height = 800, 800
 screen = pg.display.set_mode((screen_width, screen_height))
 pg.display.set_caption("STAGNUM")
 
+FPS = 60
+
 # Set tile size at VALUE x VALUE
 tile = 50
 

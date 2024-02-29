@@ -21,7 +21,7 @@ class Player(pg.sprite.Sprite):
         self.position = Vector2(self.rect.center)
         self.last_position = self.position
         self.is_moving = False
-        self.speed = 150
+        self.speed = 6
 
     def input(self):
         keys = pg.key.get_pressed()
@@ -56,10 +56,11 @@ class Player(pg.sprite.Sprite):
         else:
             self.direction.x = 0
 
-    def move(self, dt):
+    def move(self):
+        # Normalize diagonal movement velocity
         if self.direction.magnitude() > 0:
             self.direction = self.direction.normalize()
-        movement = self.direction * self.speed * dt
+        movement = self.direction * self.speed
 
         self.last_position = self.position - movement
         self.position += movement
@@ -67,9 +68,9 @@ class Player(pg.sprite.Sprite):
         # set center position of player rect to the location of the position vector
         self.rect.center = round(self.position)
 
-    def update(self, dt):
+    def update(self):
         self.input()
-        self.move(dt)
+        self.move()
 
 
 class Game:
@@ -78,12 +79,12 @@ class Game:
         self.player = Player()
 
     def main(self):
+        clock = pg.time.Clock()
         # group together sprites to update them altogether
         all_sprites = Group(self.player)
         while True:
-            dt = time.time() - self.previous_time  # calculation of 1 game loop / delta time
-            self.previous_time = time.time()  # start of delta time loop
-            all_sprites.update(dt)
+            clock.tick(FPS)
+            all_sprites.update()
             screen.fill((0, 0, 0))
             all_sprites.draw(screen)
             pg.display.flip()
