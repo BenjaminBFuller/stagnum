@@ -7,11 +7,11 @@ class Player(pg.sprite.Sprite):
     """
     Main Player controllable character class
     """
-    def __init__(self):
-        super().__init__()
+    def __init__(self, rect_center):
+        pg.sprite.Sprite.__init__(self)
         self.image = tadpole_image
         self.rect = self.image.get_rect()
-        self.rect.center = (1 * tile, 1 * tile)
+        self.rect.center = rect_center
         self.direction = Vector2()
         self.position = Vector2(self.rect.center)
         self.is_moving = False
@@ -35,7 +35,7 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_w] and self.position.y-(tile/4)-1 > 0:
             self.direction.y = -1
             self.is_moving = True
-        elif keys[pg.K_s] and self.position.y+(tile/4)+1 < screen_height:
+        elif keys[pg.K_s] and self.position.y+(tile/4)+1 < height:
             self.direction.y = 1
             self.is_moving = True
         else:
@@ -44,7 +44,7 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_a] and self.position.x-(tile/4)-1 > 0:
             self.direction.x = -1
             self.is_moving = True
-        elif keys[pg.K_d] and self.position.x+(tile/4)+1 < screen_width:
+        elif keys[pg.K_d] and self.position.x+(tile/4)+1 < width:
             self.direction.x = 1
             self.is_moving = True
         else:
