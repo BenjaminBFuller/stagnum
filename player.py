@@ -32,19 +32,19 @@ class Player(pg.sprite.Sprite):
                     pg.quit()  # quit on keystroke q
                     sys.exit()
 
-        if keys[pg.K_w] and self.position.y-(tile/4)-1 > 0:
+        if keys[pg.K_w] and self.position.y-(tile/4) > 150:
             self.direction.y = -1
             self.is_moving = True
-        elif keys[pg.K_s] and self.position.y+(tile/4)+1 < height:
+        elif keys[pg.K_s] and self.position.y+(tile/4) < 350:
             self.direction.y = 1
             self.is_moving = True
         else:
             self.direction.y = 0
 
-        if keys[pg.K_a] and self.position.x-(tile/4)-1 > 0:
+        if keys[pg.K_a] and self.position.x-(tile/4) > 0:
             self.direction.x = -1
             self.is_moving = True
-        elif keys[pg.K_d] and self.position.x+(tile/4)+1 < width:
+        elif keys[pg.K_d] and self.position.x+(tile/4) < width:
             self.direction.x = 1
             self.is_moving = True
         else:
