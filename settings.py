@@ -5,6 +5,7 @@ pg.init()
 
 # Set up the screen dimensions
 width, height = 500, 500
+pg.mouse.set_visible(False)
 flags = DOUBLEBUF | SCALED | FULLSCREEN # fullscreen, double buffering, scaled resolution
 screen = pg.display.set_mode((width, height), flags)
 pg.display.set_caption("STAGNUM")
