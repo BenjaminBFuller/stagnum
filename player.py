@@ -15,7 +15,7 @@ class Player(pg.sprite.Sprite):
         self.direction = Vector2()
         self.position = Vector2(self.rect.center)
         self.is_moving = False
-        self.speed = 5
+        self.speed = 3
 
     def input(self):
         keys = pg.key.get_pressed()
@@ -32,19 +32,19 @@ class Player(pg.sprite.Sprite):
                     pg.quit()  # quit on keystroke q
                     sys.exit()
 
-        if keys[pg.K_w] and self.position.y-(tile/4) > 150:
+        if keys[pg.K_w] and self.position.y-(tile/2) > 150:
             self.direction.y = -1
             self.is_moving = True
-        elif keys[pg.K_s] and self.position.y+(tile/4) < 350:
+        elif keys[pg.K_s] and self.position.y+(tile/2) < 350:
             self.direction.y = 1
             self.is_moving = True
         else:
             self.direction.y = 0
 
-        if keys[pg.K_a] and self.position.x-(tile/4) > 0:
+        if keys[pg.K_a] and self.position.x-(tile/2) > 0:
             self.direction.x = -1
             self.is_moving = True
-        elif keys[pg.K_d] and self.position.x+(tile/4) < width:
+        elif keys[pg.K_d] and self.position.x+(tile/2) < width:
             self.direction.x = 1
             self.is_moving = True
         else:
