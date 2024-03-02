@@ -9,9 +9,9 @@ import time
 class Game:
     def __init__(self):
         self.previous_time = time.time()  # start initial instance of timer for calculating delta time
-        self.player = Player((1 * tile, 4 * tile))
-        self.sprite_group = Group(self.player)
         self.level = Level()
+        self.player = Player((height/2, width/2))
+        self.sprite_group = Group(self.player)
 
     def draw(self):
         self.level.draw()

@@ -1,5 +1,6 @@
 from settings import *
 from pygame.math import Vector2
+from level import Level
 import sys
 
 
@@ -9,6 +10,7 @@ class Player(pg.sprite.Sprite):
     """
     def __init__(self, rect_center):
         pg.sprite.Sprite.__init__(self)
+        self.level = Level()
         self.image = tadpole_image
         self.rect = self.image.get_rect()
         self.rect.center = rect_center
@@ -32,10 +34,10 @@ class Player(pg.sprite.Sprite):
                     pg.quit()  # quit on keystroke q
                     sys.exit()
 
-        if keys[pg.K_w] and self.position.y-(tile/2) > 150:
+        if keys[pg.K_w] and self.position.y-(tile/2) > self.level.curr_level_height_ceil:
             self.direction.y = -1
             self.is_moving = True
-        elif keys[pg.K_s] and self.position.y+(tile/2) < 350:
+        elif keys[pg.K_s] and self.position.y+(tile/2) < self.level.curr_level_height_floor:
             self.direction.y = 1
             self.is_moving = True
         else:
