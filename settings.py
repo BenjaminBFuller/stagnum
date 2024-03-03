@@ -5,9 +5,9 @@ pg.init()
 
 # Set up the screen dimensions
 width, height = 500, 500
-pg.mouse.set_visible(False)
 flags = DOUBLEBUF | SCALED | FULLSCREEN  # fullscreen, double buffering, scaled resolution
 screen = pg.display.set_mode((width, height), flags)
+pg.mouse.set_visible(False)
 pg.display.set_caption("STAGNUM")
 FPS = 60
 
@@ -16,6 +16,8 @@ tile = 50
 
 # Define colors (RGB)
 WHITE = (255, 255, 255)
+
+title_font = pg.font.Font("fonts/dpcomic.ttf", 120)
 
 menu_bg = pg.image.load("images/watermenu.png").convert()
 menu_bg = pg.transform.scale(menu_bg, (tile * 10, tile * 10))
