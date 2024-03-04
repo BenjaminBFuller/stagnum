@@ -1,4 +1,4 @@
-# Stagnum
+# Stagnum main script
 from settings import *
 from player import Player
 from level import Level
@@ -14,11 +14,19 @@ class Game:
         self.sprite_group = Group(self.player)
 
     def draw(self):
+        #
+        """
+        Draw function;
+        draw all current entities onto the screen
+        """
         self.level.draw()
         self.sprite_group.update()
         self.sprite_group.draw(screen)
 
     def main(self):
+        """
+        Main game loop, encapsulates all draw and update functions
+        """
         clock = pg.time.Clock()
         # group together sprites to update them altogether
         while True:
@@ -28,5 +36,6 @@ class Game:
 
 
 if __name__ == "__main__":
+    # Create game instance and run main game loop
     game = Game()
     game.main()
