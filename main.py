@@ -32,7 +32,7 @@ class Game:
         while True:
             clock.tick(FPS)
             self.draw()
-            pg.display.update()
+            pg.display.flip()
 
 
 if __name__ == "__main__":

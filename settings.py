@@ -5,7 +5,9 @@ pg.init()
 
 # Set up the screen dimensions
 width, height = 500, 500
-flags = DOUBLEBUF | SCALED | FULLSCREEN  # fullscreen, double buffering, scaled resolution
+
+# sets flags: double buffering, scaled resolution, fullscreen, hardware accelaration (GPU rendering)
+flags = DOUBLEBUF | SCALED | FULLSCREEN | HWSURFACE
 screen = pg.display.set_mode((width, height), flags)
 pg.mouse.set_visible(False)
 pg.display.set_caption("STAGNUM")
