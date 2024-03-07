@@ -25,6 +25,10 @@ class Level:
             self.time = pg.time.get_ticks()
 
     def draw(self):
+        """
+        Level draw function; blit based on level state
+        :return:
+        """
         if self.state == "menu":
             self.curr_level_height_ceil = 150
             self.curr_level_height_floor = 350
