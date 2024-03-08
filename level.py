@@ -11,6 +11,15 @@ class Level:
         self.text_bounce = 0
 
     def menu_titles(self, x1, y1, x2, y2):
+        """
+        Create, render, and blit menu titles to (x, y) positions on screen.
+        Custom bouncing effect for (x1, y1) and blinking effect for (x2, y2)
+        :param x1:
+        :param y1:
+        :param x2:
+        :param y2:
+        :return:
+        """
         title = title_font.render("STAGNUM", False, WHITE)
         screen.blit(title, (x1 + self.text_bounce, y1 + self.text_bounce))
         play_title = title_font.render("->", False, WHITE)
