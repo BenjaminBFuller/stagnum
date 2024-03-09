@@ -20,6 +20,11 @@ class Player(pg.sprite.Sprite):
         self.speed = 3
 
     def input(self):
+        """
+        Gather keyboard and assign keyboard input to base output for use elsewhere.
+        Includes edge cases to handle output about level and screen size.
+        :return:
+        """
         keys = pg.key.get_pressed()
         self.is_moving = False
 
