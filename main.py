@@ -28,7 +28,8 @@ class Game:
         Main game loop, encapsulates all draw and update functions
         """
         clock = pg.time.Clock()
-        # group together sprites to update them altogether
+
+        # Game loop; breaks by quitting
         while True:
             clock.tick(FPS)
             self.draw()
