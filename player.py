@@ -69,6 +69,10 @@ class Player(pg.sprite.Sprite):
         self.rect.center = round(self.position)
 
     def draw(self):
+        """
+        Blit player image onto screen at the player rect (x,y)
+        :return:
+        """
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
     def update(self):
