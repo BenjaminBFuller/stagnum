@@ -58,6 +58,11 @@ class Player(pg.sprite.Sprite):
             self.direction.x = 0
 
     def move(self):
+        """
+        Player move function.
+        Calculates player vector movement, normalizing for proper diagonal travel.
+        :return:
+        """
         # Normalize diagonal movement velocity
         if self.direction.magnitude() > 0:
             self.direction = self.direction.normalize()
