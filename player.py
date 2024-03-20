@@ -81,6 +81,10 @@ class Player(pg.sprite.Sprite):
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
     def update(self):
+        """
+        Player class update function; overrides pygame update when used with player class
+        :return:
+        """
         self.input()
         self.move()
         self.draw()
