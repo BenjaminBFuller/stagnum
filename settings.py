@@ -1,3 +1,6 @@
+# settings.py
+# setters; images; pygame window setup
+
 import pygame as pg
 from pygame.locals import *
 
