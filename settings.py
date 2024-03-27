@@ -22,8 +22,10 @@ tile = 50
 # Define colors (RGB)
 WHITE = (255, 255, 255)
 
+# Set fonts
 title_font = pg.font.Font("fonts/dpcomic.ttf", 120)
 
+# Load images
 menu_bg = pg.image.load("images/watermenu.png").convert()
 menu_bg = pg.transform.scale(menu_bg, (tile * 10, tile * 10))
 
