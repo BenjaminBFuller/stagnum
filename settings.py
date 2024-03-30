@@ -4,6 +4,7 @@
 import pygame as pg
 from pygame.locals import *
 
+# initialize pygame for use in accompanying modules
 pg.init()
 
 # Set up the screen dimensions
@@ -11,9 +12,15 @@ width, height = 500, 500
 
 # sets flags: double buffering, scaled resolution, fullscreen, hardware accelaration (GPU rendering)
 flags = DOUBLEBUF | SCALED | FULLSCREEN | HWSURFACE
+
+# set up screen/window
 screen = pg.display.set_mode((width, height), flags)
-pg.mouse.set_visible(False)
 pg.display.set_caption("STAGNUM")
+
+# cursor config
+pg.mouse.set_visible(False)
+
+# Set FPS for use in clock.tick()
 FPS = 60
 
 # Set tile size at VALUE x VALUE
