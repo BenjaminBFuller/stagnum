@@ -1,4 +1,4 @@
-# Stagnum main script
+# Stagnum main script; Tadpolarity
 from settings import *
 from player import Player
 from level import Level
