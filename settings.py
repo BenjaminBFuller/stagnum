@@ -15,7 +15,7 @@ flags = DOUBLEBUF | SCALED | FULLSCREEN | HWSURFACE
 
 # set up screen/window
 screen = pg.display.set_mode((width, height), flags)
-pg.display.set_caption("STAGNUM")
+pg.display.set_caption("TADPOLARITY")
 
 # cursor config
 pg.mouse.set_visible(False)
@@ -30,7 +30,7 @@ tile = 50
 WHITE = (255, 255, 255)
 
 # Set fonts
-title_font = pg.font.Font("fonts/dpcomic.ttf", 120)
+title_font = pg.font.Font("fonts/dpcomic.ttf", 80)
 
 # Load images
 menu_bg = pg.image.load("images/watermenu.png").convert()

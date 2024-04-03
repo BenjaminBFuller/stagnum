@@ -20,7 +20,7 @@ class Level:
         :param y2:
         :return:
         """
-        title = title_font.render("STAGNUM", False, WHITE)
+        title = title_font.render("TADPOLARITY", False, WHITE)
         screen.blit(title, (x1 + self.text_bounce, y1 + self.text_bounce))
         play_title = title_font.render("->", False, WHITE)
 
@@ -42,4 +42,4 @@ class Level:
             self.curr_level_height_ceil = 150
             self.curr_level_height_floor = 350
             screen.blit(self.background, (0, 0))
-            self.menu_titles(.5 * tile, .5 * tile, 4 * tile, 7.5 * tile)
+            self.menu_titles(.5 * tile, .75 * tile, 4 * tile, 7.5 * tile)
