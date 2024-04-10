@@ -28,8 +28,7 @@ class Player(pg.sprite.Sprite):
         keys = pg.key.get_pressed()
         self.is_moving = False
 
-        # direction handling
-        # [WASD] keys for player direction
+        # quit event handling
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
@@ -39,6 +38,8 @@ class Player(pg.sprite.Sprite):
                     pg.quit()  # quit on keystroke q
                     sys.exit()
 
+        # direction handling
+        # [WASD] keys for player direction
         if keys[pg.K_w] and self.position.y-(tile/2) > self.level.curr_level_height_ceil:
             self.direction.y = -1
             self.is_moving = True
